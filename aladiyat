@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Kode ke GitHub</title>
+</head>
+<body>
+    <form id="github-input-form">
+        <label for="filename">Nama File:</label>
+        <input type="text" id="filename" name="filename" required>
+        <br>
+        <label for="code">Kode Sumber:</label>
+        <textarea id="code" name="code" rows="10" cols="50" required></textarea>
+        <br>
+        <button type="submit">Unggah ke GitHub</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById("github-input-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const token = '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';
+            const owner = 'Madani93';
+            const repo = 'sdb';
+            const filename = document.getElementById("filename").value;
+            const code = document.getElementById("code").value;
+
+            const fileData = {
+                path: `${filename}.txt`, // Nama file sesuai dengan nilai textbox
+                message: 'Unggah kode sumber',
+                content: btoa(code) // Encode kode sumber ke base64
+            };
+
+            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${fileData.path}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                },
+                body: JSON.stringify(fileData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("response").innerText = 'Kode sumber berhasil diunggah ke GitHub dengan nama file: ' + filename + '.txt';
+            })
+            .catch(error => {
+                document.getElementById("response").innerText = 'Error: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
