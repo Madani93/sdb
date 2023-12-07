@@ -1,0 +1,10 @@
+INSERT INTO daftarhadits (nama, jumlah, file) VALUES
+('Abu Daud', 4419, 'abudaud'),
+('Ahmad', 4305, 'ahmad'),
+('Bukhari', 6638, 'bukhari'),
+('Darimi', 2949, 'darimi'),
+('Ibnu Majah', 4285, 'ibnumajah'),
+('Malik', 1587, 'malik'),
+('Muslim', 4930, 'muslim'),
+('Nasai', 5364, 'nasai'),
+('Tirmidzi', 3625, 'tirmidzi');
